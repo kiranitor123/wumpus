@@ -1,0 +1,33 @@
+<div class="game">
+  <table>
+    <tr *ngFor="let rooms of game.getBoard(); let i = index">
+      <td *ngFor="let room of rooms; let j = index"
+        [ngClass]="{'celda-pit': room.name === 'P' , 'celda-wumpus': room.name === 'W', 'celda-gold': room.name === 'G', 'celda-exit': room.name === 'E'}">
+        <span class="center-hunter" *ngIf="i === game.getHunterPosition()[1] && j === game.getHunterPosition()[0]">
+          H
+        </span>
+        {{room.name}}
+      </td>
+    </tr>
+  </table>
+  <div>
+    <button class="nebula-button" (click)="turnLeft()">Girar Izquierda</button>
+    <button class="nebula-button" (click)="goForward()">Ir adelante</button>
+    <button class="nebula-button" (click)="turnRigth()">Girar Derecha</button>
+    <button class="nebula-button" (click)="throwArrow()">Lanzar Flecha</button>
+  </div>
+  <div class="logs">
+    Logs
+    <span *ngIf="game.getLogs()">{{game.getLogs()}}</span>
+  </div>
+  <div class="logs">
+    Percepciones
+    <span *ngFor="let per of getPerceptions()">{{per}}</span>
+  </div>
+
+  <h2 *ngIf="gameFinish()">
+    Finalizado
+  </h2>
+</div>
+
+
